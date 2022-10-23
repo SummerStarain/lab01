@@ -1,68 +1,68 @@
-#include"MyStack.h"
-#include"MyOperator.h"
-#include<iostream>
-#include<string>
-#include<algorithm>
-using namespace std;
-
-int main() {
-	MyStack<MyOperator>* optr = new MyStack<MyOperator>();							//ÔËËã·ûÕ»
-	MyStack<double>* opnd = new MyStack<double>();									//²Ù×÷ÊıÕ»
-	string str;
-	char op[] = { '*','(',')','-','+','/' };											//¶¨ÒåºÏ·¨²Ù×÷·ûÊı×é
-	string num;
-	MyOperator* my_operator = new MyOperator('(');
-
-	optr->push(*my_operator);
-	cout << "ÇëÊäÈëËãÊı±í´ïÊ½:" << endl;
-	cin >> str;
-	str = str + ")";
-
-	while(! str.empty()) {															//ÅĞ¶Ï×Ö·û´®ÊÇ·ñÎª¿Õ£¬Îª¿ÕÔòËãÊõ±í´ïÊ½È«²¿Íê³ÉÉ¨Ãè²¢´¦Àí
-		char ch = str.at(0);															//½«strÊ××Ö·û¶ÁÈ¡
-		if ((48 <= int(ch) && int(ch) <= 57) || ch == '.') {							//ÅĞ¶ÏÊÇ·ñÎª²Ù×÷Êı»òĞ¡Êıµã
-			num += ch;
-			str.erase(0, 1);
-		}
-		else if (find(begin(op), end(op), ch) != end(op)) {							//ÅĞ¶ÏÊÇ·ñÎªºÏ·¨²Ù×÷·û
-			if(num == ""){}
-			else {
-				opnd->push(stod(num));												//×ª»»²¢ÈëÕ»
-				num = "";
-			}
-			my_operator->set_operator(ch);
-			if (my_operator->getPriority() == 0) {									//'('ÏíÓĞ×î¸ßÈëÕ»ÓÅÏÈ¼¶
-				optr->push(*my_operator);
-				str.erase(0, 1);
-			}
-			else if (my_operator->getPriority() == -1) {								//')'ÏíÓĞ×î¸ß´¦ÀíÓÅÏÈ¼¶
-				while (optr->topValue().getPriority() != 0) {						//¼ì²éÕ»¶¥ÊÇ·ñÎª'('
-					opnd->push(optr->pop().getValue(opnd->pop(), opnd->pop()));		//·Ç'('³öÕ»²¢½øĞĞÏàÓ¦²Ù×÷
-				}
-				optr->pop();															//ÊÇ'('ÔòÆä³öÕ»
-				str.erase(0, 1);														//ÔÚstrÖĞÉ¾È¥')'
-			}
-			else if (optr->topValue().getPriority() < my_operator->getPriority()) {	//ÅĞ¶ÏÓÅÏÈ¼¶
-				optr->push(*my_operator);											//ÈôÕ»¶¥ÔËËã·ûÓÅÏÈ¼¶µÍÓÚµ±Ç°ÔËËã·û£¬Ôòµ±Ç°ÔËËã·û½øÕ»
-				str.erase(0, 1);														//ÔÚstrÖĞÉ¾È¥×Ö·û
-			}
-			else {
-				opnd->push(optr->pop().getValue(opnd->pop(), opnd->pop()));			//·ñÔòÕ»¶¥ÔËËã·ûÍËÕ»
-			}
-		}
-		else {
-			cout << "Î´¶¨Òå²Ù×÷·û»ò´íÎóÔËËãÖ¸Áî" << endl;
-			exit(1);
-		}
-	}
-
-	if (opnd->length() == 1 && optr->length() == 0) {								//ÅĞ¶ÏÊÇ·ñ´ï³É×îÖÕÌõ¼ş
-		cout << "ÔËËã½á¹ûÊÇ" << opnd->pop() << endl;
-	}						
-	else {
-		cout << "Î´Öª´íÎó" << endl;
-		exit(1);
-	}
-	system("pause");
-	return 0;
-}
+//#include"MyStack.h"
+//#include"MyOperator.h"
+//#include<iostream>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//
+//int main() {
+//	MyStack<MyOperator>* optr = new MyStack<MyOperator>();							//è¿ç®—ç¬¦æ ˆ
+//	MyStack<double>* opnd = new MyStack<double>();									//æ“ä½œæ•°æ ˆ
+//	string str;
+//	char op[] = { '*','(',')','-','+','/' };											//å®šä¹‰åˆæ³•æ“ä½œç¬¦æ•°ç»„
+//	string num;
+//	MyOperator* my_operator = new MyOperator('(');
+//
+//	optr->push(*my_operator);
+//	cout << "è¯·è¾“å…¥ç®—æ•°è¡¨è¾¾å¼:" << endl;
+//	cin >> str;
+//	str = str + ")";
+//
+//	while(! str.empty()) {															//åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦ä¸ºç©ºï¼Œä¸ºç©ºåˆ™ç®—æœ¯è¡¨è¾¾å¼å…¨éƒ¨å®Œæˆæ‰«æå¹¶å¤„ç†
+//		char ch = str.at(0);															//å°†stré¦–å­—ç¬¦è¯»å–
+//		if ((48 <= int(ch) && int(ch) <= 57) || ch == '.') {							//åˆ¤æ–­æ˜¯å¦ä¸ºæ“ä½œæ•°æˆ–å°æ•°ç‚¹
+//			num += ch;
+//			str.erase(0, 1);
+//		}
+//		else if (find(begin(op), end(op), ch) != end(op)) {							//åˆ¤æ–­æ˜¯å¦ä¸ºåˆæ³•æ“ä½œç¬¦
+//			if(num == ""){}
+//			else {
+//				opnd->push(stod(num));												//è½¬æ¢å¹¶å…¥æ ˆ
+//				num = "";
+//			}
+//			my_operator->set_operator(ch);
+//			if (my_operator->getPriority() == 0) {									//'('äº«æœ‰æœ€é«˜å…¥æ ˆä¼˜å…ˆçº§
+//				optr->push(*my_operator);
+//				str.erase(0, 1);
+//			}
+//			else if (my_operator->getPriority() == -1) {								//')'äº«æœ‰æœ€é«˜å¤„ç†ä¼˜å…ˆçº§
+//				while (optr->topValue().getPriority() != 0) {						//æ£€æŸ¥æ ˆé¡¶æ˜¯å¦ä¸º'('
+//					opnd->push(optr->pop().getValue(opnd->pop(), opnd->pop()));		//é'('å‡ºæ ˆå¹¶è¿›è¡Œç›¸åº”æ“ä½œ
+//				}
+//				optr->pop();															//æ˜¯'('åˆ™å…¶å‡ºæ ˆ
+//				str.erase(0, 1);														//åœ¨strä¸­åˆ å»')'
+//			}
+//			else if (optr->topValue().getPriority() < my_operator->getPriority()) {	//åˆ¤æ–­ä¼˜å…ˆçº§
+//				optr->push(*my_operator);											//è‹¥æ ˆé¡¶è¿ç®—ç¬¦ä¼˜å…ˆçº§ä½äºå½“å‰è¿ç®—ç¬¦ï¼Œåˆ™å½“å‰è¿ç®—ç¬¦è¿›æ ˆ
+//				str.erase(0, 1);														//åœ¨strä¸­åˆ å»å­—ç¬¦
+//			}
+//			else {
+//				opnd->push(optr->pop().getValue(opnd->pop(), opnd->pop()));			//å¦åˆ™æ ˆé¡¶è¿ç®—ç¬¦é€€æ ˆ
+//			}
+//		}
+//		else {
+//			cout << "æœªå®šä¹‰æ“ä½œç¬¦æˆ–é”™è¯¯è¿ç®—æŒ‡ä»¤" << endl;
+//			exit(1);
+//		}
+//	}
+//
+//	if (opnd->length() == 1 && optr->length() == 0) {								//åˆ¤æ–­æ˜¯å¦è¾¾æˆæœ€ç»ˆæ¡ä»¶
+//		cout << "è¿ç®—ç»“æœæ˜¯" << opnd->pop() << endl;
+//	}						
+//	else {
+//		cout << "æœªçŸ¥é”™è¯¯" << endl;
+//		exit(1);
+//	}
+//	system("pause");
+//	return 0;
+//}
