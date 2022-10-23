@@ -1,22 +1,18 @@
-#include"MyStack.h"
-#include"MyOperator.h"
-#include<iostream>
-#include<string>
-using namespace std;
+#include"final_lab.cpp"
 
-//int main() {
-//	MyStack<MyOperator> *optr = new MyStack<MyOperator>;
-//	MyStack<double> *opnd = new MyStack<double>;
-//	opnd->push(1);
-//	opnd->push(2);
-//	MyOperator* myOperator = new MyOperator('(');
-//	optr->push(*myOperator);
-//	myOperator->set_operator('+');
-//	optr->push(*myOperator);
-//	opnd->push(optr->pop().getValue(opnd->pop(), opnd->pop()));
-//	optr->pop();
-//	cout << opnd->length() << endl;
-//	cout << optr->length() << endl;
-//	system("pause");
-//	return 0;
-//}
+int main() {
+	string str;
+	char option;
+	 do{
+		 cout << "请输入算数表达式:";
+		 cin >> str;
+		 final_lab(str);
+		 cout << "是否继续计算(y/n):";
+		 cin >> option;
+		 if (option == 'n') {
+			 break;
+		 }
+	 } while (true);
+	system("pause");
+	return 0;
+}
