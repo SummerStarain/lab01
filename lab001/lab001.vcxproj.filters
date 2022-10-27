@@ -29,5 +29,40 @@
     <ClCompile Include="test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\lab001\lab001\final_lab.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lab001\lab001\compute.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="compute.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\lab001\lab001\src.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="..\..\lab001\lab001\src1.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="..\..\lab001\lab001\src2.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="..\..\lab001\lab001\src3.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="src.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="src1.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="src3.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="src2.txt">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -27,8 +27,9 @@ public:
 		return this->priority;
 	}
 
-	char get_operator() {																					//·µ»Ø·ûºÅ
-		return this->_operator;
+	string get_operator() {																					//·µ»Ø·ûºÅ
+		string _op(1, this->_operator);
+		return _op;
 	}
 
 	void set_operator(char _operator) {																		//ÉèÖÃ·ûºÅ
